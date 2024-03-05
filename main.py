@@ -1,7 +1,7 @@
 rows = cols = 9
 
 with open('example.txt','r') as file:
-    problem = file.readline()
+    problem = file.readline()[:-1]
 
 
 val = list(map(int, list(problem)))
@@ -60,6 +60,9 @@ def sudoku(board):
 
     return False
 
+
+printable(board)
+print("\n")
 
 sudoku(board)
 printable(board)
