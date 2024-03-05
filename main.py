@@ -10,7 +10,6 @@ thriceOver = lambda prev: [prev[i:i + 9] for i in range(0, len(prev) - 2, 9)]
 printable = lambda board: [print(*i) for i in board]
 
 topLefts = reversed([(i, j) for i in range(0, 7, 3) for j in range(0, 7, 3)])
-
 cmp = lambda T: 0 if 0 <= T < 3 else 3 if 3 <= T < 6 else 6
 find3by3 = lambda coords: (cmp(coords[0]), cmp(coords[1]))
 
@@ -33,12 +32,12 @@ def zero(board):
 def validState(board, coords):
     x, y = coords
     target = board[x][y]
+    thisX, thisY = find3by3(coords)
 
     rowState = [board[x][j] == target and j != y for j, _ in enumerate(board[x])]
     colState = [board[i][y] == target and i != x for i, _ in enumerate(board)]
-
-    thisX, thisY = find3by3(coords)
-    threeByThree = [board[i][j] == target and i != x and j != y for i in range(thisX, thisX + 3) for j in range(thisY, thisY + 3)]
+    threeByThree = [board[i][j] == target and i != x and j != y for i in range(thisX, thisX + 3)
+                    for j in range(thisY, thisY + 3)]
 
     return all(negation(rowState, colState, threeByThree))
 
